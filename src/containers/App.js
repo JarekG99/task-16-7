@@ -2,46 +2,58 @@ import React from 'react';
 import uuid from 'uuid';
 import style from './App.css';
 import Title from './../components/Title';
-// import TodoList from './../components/TodoList';
-// import Todo from './Todo';
+import TodoList from './../components/TodoList';
 
 class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-
-            data: [  {
-              id: 1,
-              text: 'clean room'
-              }, {
-              id: 2,
-              text: 'wash the dishes'
-              }, {
-              id: 3,
-              text: 'feed my cat'
-              }]
-          };
-        }
-  
-
-    addTodo(val){
-        const todo = {
-            text: val,
-            id: uuid.v4(),
-        };
-        const data = [...this.state.data, todo];
-        this.setState({data});
+            value: '',
+            data: [
+               'rest a while',
+               'learn coding',
+               'rest a lot',
+              
+             ]
+           };
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleClick = this.handleClick.bind(this);
     }
 
-    removeTodo(id) {
-    const remainder = this.state.data.filter(todo => todo.id !== id);
-    this.setState({data: remainder});
+    handleChange(event) {
+      this.setState({ value: event.target.value });
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log(this.state.value);
+        this.setState({
+          value: '',
+          data: [...this.state.data, this.state.value]
+
+        });
+    }
+
+    handleClick(e) {
+      e.preventDefault();
+       const remainder = this.state.data.filter(e => e.id !== id);
+       this.setState({data: remainder});
     }
 
     render() {
+
     return (
         <div className={style.TodoApp}>
-            <Title />
+
+
+          <Title data={this.state.data} />
+          <TodoList data={this.state.data} onClick={this.handleClick}/>
+
+          <form  onSubmit={this.handleSubmit}>
+            <input value={this.state.value} onChange={this.handleChange} />
+            <button>Add to do</button>
+          </form>
         </div>
       );
     }
