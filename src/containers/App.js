@@ -13,7 +13,7 @@ class App extends React.Component {
                'rest a while',
                'learn coding',
                'rest a lot',
-              
+
              ]
            };
       this.handleChange = this.handleChange.bind(this);
@@ -37,6 +37,7 @@ class App extends React.Component {
 
     handleClick(e) {
       e.preventDefault();
+      e.componentWillUnmount()
        const remainder = this.state.data.filter(e => e.id !== id);
        this.setState({data: remainder});
     }
@@ -48,7 +49,7 @@ class App extends React.Component {
 
 
           <Title data={this.state.data} />
-          <TodoList data={this.state.data} onClick={this.handleClick}/>
+          <TodoList data={this.state.data} />
 
           <form  onSubmit={this.handleSubmit}>
             <input value={this.state.value} onChange={this.handleChange} />
