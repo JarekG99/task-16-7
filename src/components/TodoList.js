@@ -4,9 +4,10 @@ const TodoList = props => (
   <ul>
     {
       props.data.map((text, id) =>
-      <li key={id}>{text} {<button>Done</button>}</li>)
-      // <li key={id}>{text} {<button onClick={this.handleClick}>Done</button>}</li>)
+      <li key={id}>{text} {<button onClick={((e) =>
+        props.handleClick(e, id))}>Done</button>}</li>)
     }
+
   </ul>
 );
 

@@ -11,7 +11,7 @@ class Title extends React.Component {
   render () {
     return (
       <div>
-        <h1>{this.state.text} ({this.state.number})</h1>
+        <h1>{this.state.text} ({this.props.data.length})</h1>
       </div>
     );
   }

@@ -27,18 +27,16 @@ class App extends React.Component {
 
     handleSubmit(e) {
       e.preventDefault();
-      console.log(this.state.value);
         this.setState({
           value: '',
           data: [...this.state.data, this.state.value]
-
         });
     }
 
-    handleClick(e) {
+    handleClick(e,id) {
       e.preventDefault();
-      e.componentWillUnmount()
-       const remainder = this.state.data.filter(e => e.id !== id);
+      // e.componentWillUnmount();
+       const remainder = this.state.data.filter((_,i) => i !== id);
        this.setState({data: remainder});
     }
 
@@ -46,11 +44,8 @@ class App extends React.Component {
 
     return (
         <div className={style.TodoApp}>
-
-
           <Title data={this.state.data} />
-          <TodoList data={this.state.data} />
-
+          <TodoList handleClick={this.handleClick} data={this.state.data} />
           <form  onSubmit={this.handleSubmit}>
             <input value={this.state.value} onChange={this.handleChange} />
             <button>Add to do</button>
